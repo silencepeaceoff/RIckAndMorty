@@ -19,7 +19,7 @@ final class RMRequest {
   private let endpoint: RMEndpoint
 
   /// Path components for API, if any
-  private let pathComponents: Set<String>
+  private let pathComponents: [String]
 
   /// Query arguments for API, if any
   private let queryParameters: [URLQueryItem]
@@ -66,7 +66,7 @@ final class RMRequest {
   ///   - queryParameters: Collection of query parameters
   public init(
     endpoint: RMEndpoint,
-    pathComponents: Set<String> = [],
+    pathComponents: [String] = [],
     queryParameters: [URLQueryItem] = []
   ) {
     self.endpoint = endpoint
@@ -74,4 +74,51 @@ final class RMRequest {
     self.queryParameters = queryParameters
   }
 
+  convenience init?(url: URL) {
+    let string = url.absoluteString
+    if !string.contains(Constants.baseUrl) {
+      return nil
+    }
+
+    let trimmed = string.replacingOccurrences(of: Constants.baseUrl + "/", with: "")
+    if trimmed.contains("/") {
+      let components = trimmed.components(separatedBy: "/")
+      if !components.isEmpty {
+        let endpointString = components[0]
+        if let rmEndpoint = RMEndpoint(rawValue: endpointString) {
+          self.init(endpoint: rmEndpoint)
+          return
+        }
+      }
+      
+    } else if trimmed.contains("?") {
+      let components = trimmed.components(separatedBy: "?")
+      if !components.isEmpty, components.count >= 2 {
+        let endpointString = components[0]
+        let queryItemsString = components[1]
+        let queryItems: [URLQueryItem] = queryItemsString.components(separatedBy: "&").compactMap {
+          guard $0.contains("=") else {
+            return nil
+          }
+          let parts = $0.components(separatedBy: "=")
+
+          return URLQueryItem(
+            name: parts[0],
+            value: parts[1]
+          )
+        }
+
+        if let rmEndpoint = RMEndpoint(rawValue: endpointString) {
+          self.init(endpoint: rmEndpoint, queryParameters: queryItems)
+          return
+        }
+      }
+    }
+    return nil
+  }
+
+}
+
+extension RMRequest {
+  static let listCharactersRequests = RMRequest(endpoint: .character)
 }
