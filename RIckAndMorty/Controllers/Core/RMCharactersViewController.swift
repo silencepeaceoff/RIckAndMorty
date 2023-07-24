@@ -16,15 +16,18 @@ final class RMCharactersViewController: UIViewController {
     super.viewDidLoad()
 
     setupView()
+    addConstraints()
   }
 
   private func setupView() {
-    view.backgroundColor = .systemBackground
-    title = "Characters"
-
     characterListView.delegate = self
 
+    view.backgroundColor = .systemBackground
+    title = "Characters"
     view.addSubview(characterListView)
+  }
+
+  private func addConstraints() {
     NSLayoutConstraint.activate([
       characterListView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       characterListView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -32,7 +35,7 @@ final class RMCharactersViewController: UIViewController {
       characterListView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     ])
   }
-  
+
 }
 
 extension RMCharactersViewController: RMCharacterListViewDelegate {
