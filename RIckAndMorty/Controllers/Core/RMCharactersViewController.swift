@@ -17,6 +17,22 @@ final class RMCharactersViewController: UIViewController {
 
     setupView()
     addConstraints()
+    addSearchButton()
+  }
+
+  private func addSearchButton() {
+    navigationItem.rightBarButtonItem = UIBarButtonItem(
+      barButtonSystemItem: .search,
+      target: self,
+      action: #selector(didTapShare)
+    )
+  }
+
+  @objc
+  private func didTapShare() {
+    let vc = RMSearchViewController(config: RMSearchViewController.Config(type: .character))
+    vc.navigationItem.largeTitleDisplayMode = .never
+    navigationController?.pushViewController(vc, animated: true)
   }
 
   private func setupView() {
