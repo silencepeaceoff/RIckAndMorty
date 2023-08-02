@@ -30,7 +30,9 @@ final class RMEpisodesViewController: UIViewController {
 
   @objc
   private func didTapShare() {
-
+    let vc = RMSearchViewController(config: .init(type: .episode))
+    vc.navigationItem.largeTitleDisplayMode = .never
+    navigationController?.pushViewController(vc, animated: true)
   }
 
   private func setupView() {
