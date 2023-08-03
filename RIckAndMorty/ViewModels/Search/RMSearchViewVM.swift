@@ -12,7 +12,16 @@ final class RMSearchViewVM {
 
   let config: RMSearchViewController.Config
 
+  //MARK: - Init
+
   init(config: RMSearchViewController.Config) {
     self.config = config
   }
+
+  //MARK: - Public
+
+  public func set(value: String, for option: RMSearchInputViewVM.DynamicOption) {
+    
+  }
+
 }
