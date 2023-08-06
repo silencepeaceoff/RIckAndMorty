@@ -58,6 +58,7 @@ final class RMLocationViewVM {
           self?.delegate?.didFetchInitialLocations()
         }
       case .failure:
+        print("Failed fetch location")
         break
       }
     }
