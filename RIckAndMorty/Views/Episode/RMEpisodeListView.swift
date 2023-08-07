@@ -38,7 +38,7 @@ final class RMEpisodeListView: UIView {
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.register(
       RMCharacterEpisodeCollectionViewCell.self,
-      forCellWithReuseIdentifier: RMCharacterEpisodeCollectionViewCell.cellIdentifire
+      forCellWithReuseIdentifier: RMCharacterEpisodeCollectionViewCell.cellIdentifier
     )
     collectionView.register(
       RMFooterLoadingCollectionReusableView.self,

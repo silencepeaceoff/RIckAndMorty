@@ -9,6 +9,6 @@ import Foundation
 
 enum RMSearchResultVM {
   case characters([RMCharacterCollectionViewCellVM])
-  case episodes([RMCharacterEpisodeCollectionViewCellVM])
   case locations([RMLocationTableViewCellVM])
+  case episodes([RMCharacterEpisodeCollectionViewCellVM])
 }

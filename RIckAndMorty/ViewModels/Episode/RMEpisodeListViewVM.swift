@@ -137,7 +137,7 @@ extension RMEpisodeListViewVM: UICollectionViewDataSource, UICollectionViewDeleg
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: RMCharacterEpisodeCollectionViewCell.cellIdentifire,
+      withReuseIdentifier: RMCharacterEpisodeCollectionViewCell.cellIdentifier,
       for: indexPath
     ) as? RMCharacterEpisodeCollectionViewCell else {
       fatalError("Unsupported cell")

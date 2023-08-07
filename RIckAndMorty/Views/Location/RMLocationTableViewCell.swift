@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RMLocationTableViewCell: UITableViewCell {
+final class RMLocationTableViewCell: UITableViewCell {
 
   static let cellIdentifier = "RMLocationTableViewCell"
 
@@ -72,6 +72,8 @@ class RMLocationTableViewCell: UITableViewCell {
     typeLabel.text = nil
     dimensionLabel.text = nil
   }
+
+  //MARK: - Public
 
   public func configure(with viewModel: RMLocationTableViewCellVM) {
     nameLabel.text = viewModel.name
