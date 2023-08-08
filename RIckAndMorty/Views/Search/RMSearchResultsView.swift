@@ -191,13 +191,16 @@ extension RMSearchResultsView:
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let currentViewModel = collectionViewCellVM[indexPath.row]
     let bounds = collectionView.bounds
+
     if currentViewModel is RMCharacterCollectionViewCellVM {
+      // Character cell size
       let width = (bounds.width - 30) / 2
       return CGSize(
         width: width,
         height: width * 1.5
       )
     } else {
+      // Episode cell size
       let width = (bounds.width - 20)
       return CGSize(
         width: width,
