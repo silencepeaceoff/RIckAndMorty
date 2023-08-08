@@ -59,11 +59,17 @@ final class RMLocationViewVM {
 
   /// Paginate if additional location are needed
   public func fetchAdditionalLocations() {
-    guard !isLoadingMoreLocations else { return }
+
+    guard !isLoadingMoreLocations
+    else { return }
     isLoadingMoreLocations = true
+
     guard let nextUrlString = apiInfo?.next,
-          let url = URL(string: nextUrlString) else { return }
-    guard let request = RMRequest(url: url) else {
+          let url = URL(string: nextUrlString)
+    else { return }
+
+    guard let request = RMRequest(url: url)
+    else {
       isLoadingMoreLocations = false
       return
     }

@@ -101,9 +101,7 @@ final class RMEpisodeListViewVM: NSObject {
 
           let originalCount = strongSelf.episodes.count
           let newCount = moreResults.count
-          let total = originalCount + newCount
-          let startingIndex = total - newCount
-          let indexPathToAdd: [IndexPath] = Array(startingIndex ..< (startingIndex + newCount)).compactMap({
+          let indexPathToAdd: [IndexPath] = Array(originalCount ..< (originalCount + newCount)).compactMap({
             return IndexPath(row: $0, section: 0)
           })
 
