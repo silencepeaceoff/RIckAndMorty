@@ -7,10 +7,10 @@
 
 import UIKit
 
+/// Interface to relay location view events
 protocol RMLocationViewDelegate: AnyObject {
   func rmLocationView(
-    _ locationView: RMLocationView,
-    didSelect location: RMLocation
+    _ locationView: RMLocationView, didSelect location: RMLocation
   )
 }
 
@@ -100,6 +100,8 @@ final class RMLocationView: UIView {
 
 }
 
+//MARK: - UITableViewDelegate
+
 extension RMLocationView: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
@@ -108,8 +110,9 @@ extension RMLocationView: UITableViewDelegate {
   }
 }
 
-extension RMLocationView: UITableViewDataSource {
+//MARK: - UITableViewDataSource
 
+extension RMLocationView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return viewModel?.cellViewModels.count ?? 0
   }
@@ -124,15 +127,17 @@ extension RMLocationView: UITableViewDataSource {
     cell.configure(with: cellViewModel)
     return cell
   }
-
 }
+
+//MARK: - UIScrollViewDelegate
 
 extension RMLocationView: UIScrollViewDelegate {
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     guard let viewModel = viewModel,
           !viewModel.cellViewModels.isEmpty,
           viewModel.shouldShowLoadMoreIndicator,
-          !viewModel.isLoadingMoreLocations else { return }
+          !viewModel.isLoadingMoreLocations
+    else { return }
 
     Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { [weak self] t in
       let offset = scrollView.contentOffset.y
@@ -140,12 +145,9 @@ extension RMLocationView: UIScrollViewDelegate {
       let totalScrollViewFixedHeight = scrollView.frame.size.height
 
       if offset >= (totalContentHeight - totalScrollViewFixedHeight - 120) {
-        DispatchQueue.main.async {
-          self?.showLoadingIndicator()
-        }
+        self?.showLoadingIndicator()
         viewModel.fetchAdditionalLocations()
       }
-
       t.invalidate()
     }
   }

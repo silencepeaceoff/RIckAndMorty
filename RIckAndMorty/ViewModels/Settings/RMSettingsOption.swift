@@ -32,7 +32,7 @@ enum RMSettingsOption: CaseIterable {
     case .viewSeries:
       return URL(string: "https://www.justwatch.com/us/tv-show/rick-and-morty")
     case .viewCode:
-      return URL(string: "https://github.com/silencepeaceoff")
+      return URL(string: "https://github.com/silencepeaceoff/RIckAndMorty")
     }
   }
 
